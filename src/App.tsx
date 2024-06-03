@@ -1,11 +1,19 @@
+import { Toaster } from 'react-hot-toast'
 import './App.css'
+import { WeatherProvider } from './contexts/weather.provider'
+import Home from './pages/home'
 
 const App = () => {
   return (
     <>
-      <div className='text-6xl font-medium text-slate-600 text-center'>
-        Weather Web App using React
-      </div>
+      <Toaster
+        toastOptions={{
+          duration: 5000,
+        }}
+      />
+      <WeatherProvider>
+        <Home />
+      </WeatherProvider>
     </>
   )
 }
