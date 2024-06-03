@@ -77,6 +77,8 @@ export const WeatherProvider: React.FC<PropsWithChildren> = ({ children }) => {
 
     if (data) {
       setWeatherDataList(data);
+    } else {
+      localStorage.setItem('weatherDataList', JSON.stringify([INITIAL_DUMMY_DATA]));
     }
   }, []);
 
