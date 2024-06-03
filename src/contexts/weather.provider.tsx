@@ -8,6 +8,7 @@ import React, {
 } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { locationString } from '@/lib/utils';
 
 export interface WeatherData {
   lat?: number;
@@ -84,7 +85,7 @@ export const WeatherProvider: React.FC<PropsWithChildren> = ({ children }) => {
   }, []);
 
   const saveWeatherData = async (lat: number, lon: number): Promise<void> => {
-    const weatherData = weatherDataList.find((data) => data.lat === lat && data.lon === lon);
+    const weatherData = weatherDataList?.find((data) => data.lat === lat && data.lon === lon);
 
     if (weatherData) {
       setCurrentLocationWeatherData(weatherData);
@@ -94,9 +95,15 @@ export const WeatherProvider: React.FC<PropsWithChildren> = ({ children }) => {
     const newWeatherData = await fetchWeatherData(lat, lon);
 
     if (newWeatherData) {
+      toast.success(`New Weather Report found for location - ${locationString({
+        name: newWeatherData.name,
+        country: newWeatherData.country,
+        lat: newWeatherData.lat!,
+        lon: newWeatherData.lon!,
+      })}`);
+
       setCurrentLocationWeatherData(newWeatherData);
-      const successString = (newWeatherData.name && newWeatherData.country) ? `${newWeatherData.name}, ${newWeatherData.country}` : `Lat: ${newWeatherData.lat}, Lng: ${newWeatherData.lon}`;
-      toast.success(`New Weather Report found for location - ${successString}`);
+
       const list = JSON.parse(localStorage.getItem('weatherDataList')!);
       const newWeatherDataList = [...list, newWeatherData];
       localStorage.setItem('weatherDataList', JSON.stringify(newWeatherDataList));

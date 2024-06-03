@@ -1,6 +1,7 @@
 import { WeatherData } from "@/contexts/weather.provider";
 import { memo, useState } from "react";
 import WeatherDataModal from "./weather-data-modal";
+import { weatherLocationString } from "@/lib/utils";
 
 type Props = {
   weatherDataList: WeatherData[];
@@ -35,7 +36,12 @@ const WeatherDataList: React.FC<Props> = ({ weatherDataList }) => {
                   src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
                 />
                 <p className="text-base font-semibold">
-                  {weather.name && weather.country ? (`${weather.name}, ${weather.country}`) : `Lat: ${weather.lat}, Lng: ${weather.lon}`}
+                  {weatherLocationString({
+                    name: weather.name,
+                    country: weather.country,
+                    lat: weather.lat!,
+                    lon: weather.lon!,
+                  })}
                 </p>
               </div>
             ))}

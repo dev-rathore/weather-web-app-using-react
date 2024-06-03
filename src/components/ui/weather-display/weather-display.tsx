@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { weatherLocationString } from '@/lib/utils';
 
 interface WeatherProps {
   weather: any;
@@ -20,7 +21,12 @@ const WeatherDisplay: React.FC<WeatherProps> = ({
   return (
     <div className="flex flex-col items-center py-4 px-6 bg-[#5782B7] shadow-md rounded-lg">
       <h2 className="text-xl font-bold">
-        {weather.name && weather.country ? (`${weather.name}, ${weather.country}`) : `Lat: ${weather.lat}, Lng: ${weather.lon}`}
+        {weatherLocationString({
+          name: weather?.name,
+          country: weather?.country,
+          lat: weather?.lat,
+          lon: weather?.lon,
+        })}
       </h2>
       <img src={weatherIcon} alt={main} />
       <div className='text-base font-semibold'>
