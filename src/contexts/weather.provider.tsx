@@ -83,9 +83,7 @@ export const WeatherProvider: React.FC<PropsWithChildren> = ({ children }) => {
     initializeWeatherData();
   }, []);
 
-  // Fetch weather data from local storage by lat lng
   const saveWeatherData = async (lat: number, lon: number): Promise<void> => {
-    console.log(weatherDataList);
     const weatherData = weatherDataList.find((data) => data.lat === lat && data.lon === lon);
 
     if (weatherData) {
@@ -109,7 +107,7 @@ export const WeatherProvider: React.FC<PropsWithChildren> = ({ children }) => {
   }
 
   const fetchWeatherData = async (lat: number, lon: number): Promise<WeatherData | null> => {
-    const apiKey = import.meta.env.VITE_OPEN_WEATHER_MAP_API_KEY;
+    const apiKey = process.env.OPEN_WEATHER_MAP_API_KEY;
 
     try {
       const response = await axios.get(`https://api.openweathermap.org/data/2.5/weather`, {

@@ -29,7 +29,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setLatLon }) => {
   return (
     <div className="relative flex items-center">
       <Autocomplete
-        apiKey={import.meta.env.VITE_GOOGLE_MAPS_API_KEY}
+        apiKey={process.env.GOOGLE_MAPS_API_KEY}
         onPlaceSelected={handlePlaceSelected}
         options={{ types: ['(regions)'] }}
         className={inputStyles}
