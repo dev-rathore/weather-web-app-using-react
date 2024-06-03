@@ -4,6 +4,8 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import PropTypes from 'prop-types';
 
+import { motion } from 'framer-motion';
+
 import markerIconPng from 'leaflet/dist/images/marker-icon.png';
 
 import './map-display.css';
@@ -41,27 +43,39 @@ const MapDisplay: React.FC<MapDisplayProps> = ({ lat, lon, zoom, setLatLon }) =>
   };
 
   return (
-    <MapContainer
-      center={[lat, lon]}
-      zoom={zoom}
-      style={{
-        height: '100%',
-        minHeight: '500px',
-        width: '100%',
-        flexGrow: 1,
-        borderRadius: '4.5rem !important',
-        overflow: 'hidden',
-      }}>
-      {/* <TileLayer
-        url="https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      /> */}
-      <TileLayer
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      />
-      <LocationMarker />
-    </MapContainer>
+    <motion.div
+      className="w-full h-full"
+      transition={{
+        duration: 1,
+        ease: "easeOut",
+      }}
+      variants={{
+        hidden: { translateX: 200 },
+        visible: { translateX: 0 },
+      }}
+    >
+      <MapContainer
+        center={[lat, lon]}
+        zoom={zoom}
+        style={{
+          height: '100%',
+          minHeight: '500px',
+          width: '100%',
+          flexGrow: 1,
+          borderRadius: '4.5rem !important',
+          overflow: 'hidden',
+        }}>
+        {/* <TileLayer
+          url="https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        /> */}
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        />
+        <LocationMarker />
+      </MapContainer>
+    </motion.div>
   );
 };
 

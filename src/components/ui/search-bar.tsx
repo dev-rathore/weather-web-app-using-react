@@ -4,6 +4,8 @@ import Autocomplete from 'react-google-autocomplete';
 import { SearchIcon } from 'lucide-react';
 import { inputStyles } from './input';
 
+import { motion } from 'framer-motion';
+
 interface SearchBarProps {
   setLatLon: (lat: number, lon: number) => void;
 }
@@ -27,7 +29,17 @@ const SearchBar: React.FC<SearchBarProps> = ({ setLatLon }) => {
   };
 
   return (
-    <div className="relative flex items-center">
+    <motion.div
+      className="relative flex items-center"
+      variants={{
+        hidden: { translateX: 275 },
+        visible: { translateX: 0 },
+      }}
+      transition={{
+        duration: 1,
+        ease: "easeOut",
+      }}
+    >
       <Autocomplete
         apiKey={process.env.GOOGLE_MAPS_API_KEY}
         onPlaceSelected={handlePlaceSelected}
@@ -37,7 +49,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setLatLon }) => {
       <button onClick={handleSearchClick} className="text-white absolute right-4">
         <SearchIcon />
       </button>
-    </div>
+    </motion.div>
   );
 };
 

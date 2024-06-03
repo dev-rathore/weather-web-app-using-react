@@ -7,6 +7,8 @@ import WeatherDataList from '@/components/ui/weather-data-list/weather-data-list
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
+import { motion } from 'framer-motion';
+
 const Home: React.FC = () => {
   const [zoom] = useState<number>(13);
   const [lat, setLat] = useState<number>(51.505);
@@ -32,10 +34,28 @@ const Home: React.FC = () => {
   };
 
   return (
-    <div className="container mx-auto px-4 py-6 flex flex-col gap-4 min-h-screen">
-      <h1 className="text-3xl font-bold text-center mb-4">Weather Web App</h1>
+    <motion.section
+      className="container mx-auto px-4 py-6 flex flex-col gap-4 min-h-screen"
+      initial={"hidden"}
+      animate={"visible"}
+    >
+      <motion.h1
+        className="text-3xl font-bold text-center mb-4"
+        variants={{
+          hidden: { translateY: -100 },
+          visible: { translateY: 0 },
+        }}
+        transition={{
+          duration: 0.5,
+          ease: "easeOut",
+        }}
+      >
+        Weather Web App
+      </motion.h1>
       <div className='grow flex flex-col md:flex-row gap-4'>
-        <div className='flex flex-col sm:flex-row md:flex-col gap-4 order-2 md:order-1'>
+        <div
+          className='flex flex-col sm:flex-row md:flex-col gap-4 order-2 md:order-1'
+        >
           {
             currentLocationWeatherData &&
               <WeatherDisplay
@@ -48,7 +68,17 @@ const Home: React.FC = () => {
         </div>
         <div className='flex flex-col grow gap-4 order-1 md:order-2'>
           <form onSubmit={handleSubmit}>
-            <div className="flex space-x-2 mb-4">
+            <motion.div
+              className="flex space-x-2 mb-4"
+              variants={{
+                hidden: { translateX: 200 },
+                visible: { translateX: 0 },
+              }}
+              transition={{
+                duration: 1,
+                ease: "easeOut",
+              }}
+            >
               <Input
                 type="number"
                 name="lat"
@@ -62,13 +92,13 @@ const Home: React.FC = () => {
                 required
               />
               <Button type="submit" size="lg">SUBMIT</Button>
-            </div>
+            </motion.div>
             <SearchBar setLatLon={onLatLngChange} />
           </form>
           {lat && lon && <MapDisplay lat={lat} lon={lon} zoom={zoom} setLatLon={onLatLngChange} />}
         </div>
       </div>
-    </div>
+    </motion.section>
   );
 };
 
