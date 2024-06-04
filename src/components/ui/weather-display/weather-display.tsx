@@ -21,7 +21,7 @@ const WeatherDisplay: React.FC<WeatherProps> = ({
 
   return (
     <motion.div
-      className="flex cursor-pointer z-200 flex-col items-center py-4 px-6 bg-[#5782B7] shadow-md rounded-lg"
+      className="flex cursor-pointer z-200 flex-col items-center py-4 px-6 border-2 border-accent-200 bg-light dark:bg-accent-100 shadow-md rounded-lg"
       whileHover={{
         rotateZ: -5,
         transition: { duration: 0.3 },

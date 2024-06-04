@@ -22,7 +22,7 @@ const WeatherDataList: React.FC<Props> = ({ weatherDataList }) => {
 
   return (
     <motion.div
-      className="overflow-y-auto grow bg-[#2A5792] rounded-lg py-5 px-5"
+      className="overflow-y-auto grow rounded-lg py-5 px-5 border-2 border-accent-200 bg-light dark:bg-accent-200"
       transition={{
         duration: 1,
         ease: "easeOut",
@@ -35,13 +35,13 @@ const WeatherDataList: React.FC<Props> = ({ weatherDataList }) => {
       {modalWeatherData && <WeatherDataModal weatherData={modalWeatherData} onClose={handleModalClose} />}
       {weatherDataList?.length > 0 && (
         <div className="flex flex-col gap-4">
-          <h2 className="text-xl font-bold text-center">Weather Search History</h2>
+          <h2 className="text-xl font-bold text-center text-accent-200 dark:text-white">Weather Search History</h2>
           <div className='max-h-[48vh] flex flex-col overflow-y-auto'>
             {weatherDataList?.reverse().map((weather, index) => (
               <div
                 key={index}
                 onClick={() => handleModalDataChange(weather)}
-                className="cursor-pointer flex gap-4 items-center text-white px-4 py-2 rounded-lg hover:bg-[#5782B7] transition-colors"
+                className="cursor-pointer flex gap-4 items-center px-4 py-2 rounded-lg text-accent-200 hover:text-light dark:text-white hover:bg-accent-200 dark:hover:bg-accent-100 transition-colors"
               >
                 <img
                   width={40}

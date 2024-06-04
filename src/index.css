@@ -4,8 +4,16 @@
 
 @layer base {
   :root {
-    --background: #FFFFFF;
-    --foreground: #191919;
+    --background: #F7F7F2;
+    --foreground: #245FAD;
+
+    --light: #F7F7F2;
+    --dark: #191919;
+
+    --badge: #B8B8FF;
+
+    --accent-100: #5782B7;
+    --accent-200: #2A5792;
 
     --card: 0 0% 100%;
     --card-foreground: 222.2 84% 4.9%;
@@ -37,7 +45,7 @@
 
   .dark {
     --background: #245FAD;
-    --foreground: #FFFFFF;
+    --foreground: #FBFAF8;
 
     --card: 222.2 84% 4.9%;
     --card-foreground: 210 40% 98%;
@@ -71,6 +79,6 @@
     @apply border-border;
   }
   body {
-    @apply dark bg-background text-foreground;
+    @apply bg-background text-foreground;
   }
 }

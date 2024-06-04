@@ -2,6 +2,7 @@ import { Toaster } from 'react-hot-toast'
 import './App.css'
 import { WeatherProvider } from './contexts/weather.provider'
 import Home from './pages/home'
+import { ThemeProvider } from './contexts/theme.provider'
 
 const App = () => {
   return (
@@ -11,9 +12,11 @@ const App = () => {
           duration: 5000,
         }}
       />
-      <WeatherProvider>
-        <Home />
-      </WeatherProvider>
+      <ThemeProvider>
+        <WeatherProvider>
+          <Home />
+        </WeatherProvider>
+      </ThemeProvider>
     </>
   )
 }

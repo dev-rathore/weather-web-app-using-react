@@ -23,6 +23,11 @@ module.exports = {
         ring: "hsl(var(--ring))",
         background: "var(--background)",
         foreground: "var(--foreground)",
+        badge: "var(--badge)",
+        light: "var(--light)",
+        dark: "var(--dark)",
+        "accent-100": "var(--accent-100)",
+        "accent-200": "var(--accent-200)",
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",

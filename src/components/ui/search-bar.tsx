@@ -46,7 +46,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setLatLon }) => {
         options={{ types: ['(regions)'] }}
         className={inputStyles}
       />
-      <button onClick={handleSearchClick} className="text-white absolute right-4">
+      <button onClick={handleSearchClick} className="text-accent-200 dark:text-light absolute right-4">
         <SearchIcon />
       </button>
     </motion.div>

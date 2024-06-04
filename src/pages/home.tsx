@@ -8,6 +8,8 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 
 import { motion } from 'framer-motion';
+import { useThemeContext } from '@/contexts/theme.provider';
+import { Switch } from '@/components/ui/switch';
 
 const Home: React.FC = () => {
   const [zoom] = useState<number>(13);
@@ -18,6 +20,10 @@ const Home: React.FC = () => {
     currentLocationWeatherData,
     saveWeatherData,
   } = useWeatherContext();
+  const {
+    isDarkMode,
+    onThemeModeChange,
+  } = useThemeContext();
 
   const onLatLngChange = async (latitude: number, longitude: number) => {
     setLat(latitude);
@@ -39,19 +45,24 @@ const Home: React.FC = () => {
       initial={"hidden"}
       animate={"visible"}
     >
-      <motion.h1
-        className="text-3xl font-bold text-center mb-4"
-        variants={{
-          hidden: { translateY: -100 },
-          visible: { translateY: 0 },
-        }}
-        transition={{
-          duration: 0.5,
-          ease: "easeOut",
-        }}
-      >
-        Weather Web App
-      </motion.h1>
+      <div className='relative'>
+        <motion.h1
+          className="text-3xl font-bold text-center mb-4"
+          variants={{
+            hidden: { translateY: -100 },
+            visible: { translateY: 0 },
+          }}
+          transition={{
+            duration: 0.5,
+            ease: "easeOut",
+          }}
+        >
+          Weather Web App
+        </motion.h1>
+        <div className='absolute top-3 right-0'>
+          <Switch checked={isDarkMode} onCheckedChange={onThemeModeChange} />
+        </div>
+      </div>
       <div className='grow flex flex-col md:flex-row gap-4'>
         <div
           className='flex flex-col sm:flex-row md:flex-col gap-4 order-2 md:order-1'
