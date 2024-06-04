@@ -28,15 +28,20 @@ const Home: React.FC = () => {
   const onLatLngChange = async (latitude: number, longitude: number) => {
     setLat(latitude);
     setLon(longitude);
-    await saveWeatherData(latitude, longitude);
   };
+
+  const findOutWeather = async (latitude: number, longitude: number) => {
+    setLat(latitude);
+    setLon(longitude);
+    await saveWeatherData(latitude, longitude);
+  }
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     const form = event.target as HTMLFormElement;
     const latInput = form.elements.namedItem('lat') as HTMLInputElement;
     const lonInput = form.elements.namedItem('lon') as HTMLInputElement;
-    onLatLngChange(parseFloat(latInput.value), parseFloat(lonInput.value));
+    findOutWeather(parseFloat(latInput.value), parseFloat(lonInput.value));
   };
 
   return (
@@ -104,9 +109,17 @@ const Home: React.FC = () => {
               />
               <Button type="submit" size="lg">SUBMIT</Button>
             </motion.div>
-            <SearchBar setLatLon={onLatLngChange} />
+            <SearchBar setLatLon={findOutWeather} />
           </form>
-          {lat && lon && <MapDisplay lat={lat} lon={lon} zoom={zoom} setLatLon={onLatLngChange} />}
+          {lat && lon && (
+            <MapDisplay
+              lat={lat}
+              lon={lon}
+              zoom={zoom}
+              setLatLon={onLatLngChange}
+              findOutWeather={findOutWeather}
+            />
+          )}
         </div>
       </div>
     </motion.section>

@@ -33,9 +33,9 @@ const WeatherDataList: React.FC<Props> = ({ weatherDataList }) => {
       }}
     >
       {modalWeatherData && <WeatherDataModal weatherData={modalWeatherData} onClose={handleModalClose} />}
-      {weatherDataList?.length > 0 && (
-        <div className="flex flex-col gap-4">
-          <h2 className="text-xl font-bold text-center text-accent-200 dark:text-white">Weather Search History</h2>
+      <div className="flex flex-col gap-4">
+        <h2 className="text-xl font-bold text-center text-accent-200 dark:text-white">Weather Search History</h2>
+        {weatherDataList?.length > 0 && (
           <div className='max-h-[48vh] flex flex-col overflow-y-auto'>
             {weatherDataList?.reverse().map((weather, index) => (
               <div
@@ -58,8 +58,8 @@ const WeatherDataList: React.FC<Props> = ({ weatherDataList }) => {
               </div>
             ))}
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </motion.div>
   );
 };

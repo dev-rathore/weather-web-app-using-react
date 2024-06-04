@@ -23,9 +23,10 @@ interface MapDisplayProps {
   lon: number;
   zoom: number;
   setLatLon: (lat: number, lon: number) => void;
+  findOutWeather: (lat: number, lon: number) => void;
 }
 
-const MapDisplay: React.FC<MapDisplayProps> = ({ lat, lon, zoom, setLatLon }) => {
+const MapDisplay: React.FC<MapDisplayProps> = ({ lat, lon, zoom, setLatLon, findOutWeather }) => {
   const LocationMarker = () => {
     const map = useMap();
 
@@ -36,6 +37,8 @@ const MapDisplay: React.FC<MapDisplayProps> = ({ lat, lon, zoom, setLatLon }) =>
     useMapEvents({
       click: (e) => {
         if (e.originalEvent.shiftKey) {
+          findOutWeather(e.latlng.lat, e.latlng.lng);
+        } else {
           setLatLon(e.latlng.lat, e.latlng.lng);
         }
       },
@@ -86,6 +89,7 @@ MapDisplay.propTypes = {
   lon: PropTypes.number.isRequired,
   zoom: PropTypes.number.isRequired,
   setLatLon: PropTypes.func.isRequired,
+  findOutWeather: PropTypes.func.isRequired,
 };
 
 export default MapDisplay;
