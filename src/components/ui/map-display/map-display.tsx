@@ -35,7 +35,9 @@ const MapDisplay: React.FC<MapDisplayProps> = ({ lat, lon, zoom, setLatLon }) =>
 
     useMapEvents({
       click: (e) => {
-        setLatLon(e.latlng.lat, e.latlng.lng);
+        if (e.originalEvent.shiftKey) {
+          setLatLon(e.latlng.lat, e.latlng.lng);
+        }
       },
     });
 
