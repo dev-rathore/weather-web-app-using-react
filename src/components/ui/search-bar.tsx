@@ -7,16 +7,16 @@ import { inputStyles } from './input';
 import { motion } from 'framer-motion';
 
 interface SearchBarProps {
-  setLatLon: (lat: number, lon: number) => void;
+  findOutWeather: (lat: number, lon: number) => void;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ setLatLon }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ findOutWeather }) => {
   const handlePlaceSelected = (place: google.maps.places.PlaceResult) => {
     if (place.geometry) {
       const lat = place.geometry.location?.lat();
       const lng = place.geometry.location?.lng();
       if (lat && lng) {
-        setLatLon(lat, lng);
+        findOutWeather(lat, lng);
       }
     }
   };
@@ -54,7 +54,7 @@ const SearchBar: React.FC<SearchBarProps> = ({ setLatLon }) => {
 };
 
 SearchBar.propTypes = {
-  setLatLon: PropTypes.func.isRequired,
+  findOutWeather: PropTypes.func.isRequired,
 };
 
 export default memo(SearchBar);

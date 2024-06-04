@@ -31,8 +31,7 @@ const Home: React.FC = () => {
   };
 
   const findOutWeather = async (latitude: number, longitude: number) => {
-    setLat(latitude);
-    setLon(longitude);
+    onLatLngChange(latitude, longitude);
     await saveWeatherData(latitude, longitude);
   }
 
@@ -109,7 +108,7 @@ const Home: React.FC = () => {
               />
               <Button type="submit" size="lg">SUBMIT</Button>
             </motion.div>
-            <SearchBar setLatLon={findOutWeather} />
+            <SearchBar findOutWeather={findOutWeather} />
           </form>
           {lat && lon && (
             <MapDisplay
