@@ -5,6 +5,7 @@ import React, {
   useEffect,
   useState,
 } from 'react';
+
 type ThemeContextType = {
   isDarkMode: boolean;
   onThemeModeChange: () => void;

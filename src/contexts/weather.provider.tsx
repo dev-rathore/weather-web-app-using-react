@@ -11,8 +11,8 @@ import toast from 'react-hot-toast';
 import { locationString } from '@/lib/utils';
 
 export interface WeatherData {
-  lat?: number;
-  lon?: number;
+  lat: number;
+  lon: number;
   name: string;
   country: string;
   main: {
@@ -31,34 +31,27 @@ export interface WeatherData {
 type WeatherContextType = {
   saveWeatherData: (lat: number, lon: number) => Promise<void>;
   weatherDataList: WeatherData[];
-  setCurrentLocationWeatherData?: any;
-  currentLocationWeatherData?: any;
+  setCurrentLocationWeatherData?: React.Dispatch<React.SetStateAction<WeatherData>>;
+  currentLocationWeatherData?: WeatherData;
 };
 
 const INITIAL_DUMMY_DATA = {
   "lat": 51.505,
   "lon": -0.09,
   "main": {
-      "temp": 20.01,
-      "feels_like": 19.76,
-      "temp_min": 18.92,
-      "temp_max": 21.38,
-      "pressure": 1020,
-      "humidity": 65
+    "temp": 20.01,
+    "humidity": 65
   },
   "name": "City of London",
   "country": "GB",
   "wind": {
-      "speed": 3.6,
-      "deg": 300
+    "speed": 3.6,
   },
   "weather": [
-      {
-          "id": 804,
-          "main": "Clouds",
-          "description": "overcast clouds",
-          "icon": "04d"
-      }
+    {
+      "main": "Clouds",
+      "icon": "04d"
+    }
   ]
 };
 
@@ -70,7 +63,7 @@ export const WeatherProvider: React.FC<PropsWithChildren> = ({ children }) => {
   const [weatherDataList, setWeatherDataList] = useState<WeatherData[]>(
     JSON.parse(localStorage.getItem('weatherDataList')!)
   );
-  const [currentLocationWeatherData, setCurrentLocationWeatherData] = useState<any>(INITIAL_DUMMY_DATA);
+  const [currentLocationWeatherData, setCurrentLocationWeatherData] = useState<WeatherData>(INITIAL_DUMMY_DATA);
 
   const initializeWeatherData = useCallback(async () => {
     const data = JSON.parse(localStorage.getItem('weatherDataList')!);
@@ -100,8 +93,8 @@ export const WeatherProvider: React.FC<PropsWithChildren> = ({ children }) => {
       toast.success(`New Weather Report found for location - ${locationString({
         name: newWeatherData.name,
         country: newWeatherData.country,
-        lat: newWeatherData.lat!,
-        lon: newWeatherData.lon!,
+        lat: newWeatherData.lat,
+        lon: newWeatherData.lon,
       })}`);
 
       setCurrentLocationWeatherData(newWeatherData);
@@ -140,7 +133,7 @@ export const WeatherProvider: React.FC<PropsWithChildren> = ({ children }) => {
         weather: data.weather,
       };
     } catch (error) {
-      console.error('Error fetching weather data:', error);
+      toast.error(`Error fetching weather data: ${error}`);
       return null;
     }
   };

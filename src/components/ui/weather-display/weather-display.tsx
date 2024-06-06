@@ -1,10 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { weatherLocationString } from '@/lib/utils';
 import { motion } from 'framer-motion';
+import { WeatherData } from '@/contexts/weather.provider';
 
 interface WeatherProps {
-  weather: any;
+  weather: WeatherData;
 }
 
 const WeatherDisplay: React.FC<WeatherProps> = ({
@@ -52,10 +52,6 @@ const WeatherDisplay: React.FC<WeatherProps> = ({
       </div>
     </motion.div>
   );
-};
-
-WeatherDisplay.propTypes = {
-  weather: PropTypes.object.isRequired,
 };
 
 export default WeatherDisplay;
