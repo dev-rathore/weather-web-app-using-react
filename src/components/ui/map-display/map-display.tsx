@@ -26,14 +26,20 @@ interface MapDisplayProps {
   findOutWeather: (lat: number, lon: number) => void;
 }
 
-const MapDisplay: React.FC<MapDisplayProps> = ({ lat, lon, zoom, setLatLon, findOutWeather }) => {
+const MapDisplay: React.FC<MapDisplayProps> = ({
+  lat,
+  lon,
+  zoom,
+  setLatLon,
+  findOutWeather,
+}) => {
+  const map = useMap();
+
+  useEffect(() => {
+    map.setView([lat, lon], zoom);
+  }, [lat, lon, zoom, map]);
+
   const LocationMarker = () => {
-    const map = useMap();
-
-    useEffect(() => {
-      map.setView([lat, lon], zoom);
-    }, [lat, lon, zoom, map]);
-
     useMapEvents({
       click: (e) => {
         if (e.originalEvent.shiftKey) {
